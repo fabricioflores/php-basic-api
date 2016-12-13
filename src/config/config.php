@@ -4,7 +4,7 @@
  * configuración SGBD
  */
 define('DATABASE_HOST', '127.0.0.1');
-define('DATABASE_PORT', 3306);
+define('DATABASE_PORT', 3307);
 define('DATABASE_DBNAME', 'miw16_results');
 define('DATABASE_USER', 'miw16');
 define('DATABASE_PASSWD', '*miw16*');

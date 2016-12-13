@@ -1,6 +1,7 @@
 <?php // src/routes_user.php
 
 use Swagger\Annotations as SWG;
+use MiW16\Results\Entity\User;
 
 /**
  * Summary: Returns all users
@@ -214,12 +215,36 @@ $app->post(
     '/users',
     function ($request, $response, $args) {
         $this->logger->info('POST \'/users\'');
+        $em = getEntityManager();
         $data = json_decode($request->getBody(), true); // parse the JSON into an assoc. array
-        // process $data...
-
-        // TODO
-        $newResponse = $response->withStatus(501);
-        return $newResponse;
+        if (empty($data['username']) || empty($data['email']) || empty($data['password'])) {
+          $newResponse = $response->withStatus(422);
+          $datos = array(
+              'code' => 422,
+              'message' => 'Username, e-mail or password is left out'
+          );
+          return $this->renderer->render($newResponse, 'message.phtml', $datos);
+        }else{
+          $user = $em->getRepository('MiW16\Results\Entity\User')
+                     ->findOneBy(array('username' => $data['username'], 'email' => $data['email']));
+          if ($user) {
+            $newResponse = $response->withStatus(400);
+            $datos = array(
+                'code' => 400,
+                'message' => 'Username or email already exists.'
+            );
+            return $this->renderer->render($newResponse, 'message.phtml', $datos);
+          }else{
+            $user = new User($data['username'],
+                             $data['email'],
+                             $data['password'],
+                             $data['enabled'],
+                             $data['token']);
+            $em->persist($user);
+            $em->flush();
+          }
+        }
+        return $response->withJson($user, 201);
     }
 )->setName('miw_post_users');
 
@@ -273,4 +298,3 @@ $app->put(
         return $newResponse;
     }
 )->setName('miw_post_users');
-

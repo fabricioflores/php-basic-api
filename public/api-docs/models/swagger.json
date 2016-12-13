@@ -21,6 +21,30 @@
         "application/json"
     ],
     "paths": {
+        "/results": {
+            "get": {
+                "tags": [
+                    "Results"
+                ],
+                "summary": "Returns all results",
+                "description": "Returns all results from the system that the result has access to.",
+                "operationId": "miw_cget_results",
+                "responses": {
+                    "200": {
+                        "description": "Result array response",
+                        "schema": {
+                            "$ref": "#/definitions/ResultsArray"
+                        }
+                    },
+                    "404": {
+                        "description": "Result object not found",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                }
+            }
+        },
         "/users": {
             "get": {
                 "tags": [

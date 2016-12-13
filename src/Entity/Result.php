@@ -160,3 +160,101 @@ class Result implements \JsonSerializable
         );
     }
 }
+
+/**
+ * @SWG\Definition(
+ *     definition="Result",
+ *     required = { "id", "result", "time" },
+ *     @SWG\Property(
+ *          property    = "id",
+ *          description = "Result Id",
+ *          type        = "integer",
+ *          format      = "int32"
+ *      ),
+ *      @SWG\Property(
+ *          property    = "result",
+ *          description = "Result value",
+ *          type        = "integer",
+ *          format      = "int32"
+ *      ),
+ *      @SWG\Property(
+ *          property    = "time",
+ *          description = "Timestamp of creation",
+ *          type        = "string",
+ *          format      = "date"
+ *      ),
+ *      @SWG\Property(
+ *          property    = "user_id",
+ *          description = "User Id FK",
+ *          type        = "integer",
+ *          format      = "int32"
+ *      ),
+ *      example = {
+ *          "id"       = 1508,
+ *          "result"   = 10,
+ *          "time"     = "2016-12-11 00:00:00",
+ *          "user_id"  = 1
+ *     }
+ * )
+ * @SWG\Parameter(
+ *      name        = "resultId",
+ *      in          = "path",
+ *      description = "ID of result to fetch",
+ *      required    = true,
+ *      type        = "integer",
+ *      format      = "int32"
+ * )
+ */
+
+/**
+ * @SWG\Definition(
+ *      definition = "ResultData",
+ *      @SWG\Property(
+ *          property    = "result",
+ *          description = "Result value",
+ *          type        = "string"
+ *      ),
+ *      @SWG\Property(
+ *          property    = "date",
+ *          description = "Timestamp of creation",
+ *          type        = "string"
+ *      ),
+ *      @SWG\Property(
+ *          property    = "user_id",
+ *          description = "user id",
+ *          type        = "string"
+ *      ),
+ *      example = {
+ *         "id" = 7,
+ *         "result"= 0,
+ *         "user"= {
+ *            "id"= 5,
+ *            "username"= "fabriciofloresgallardo",
+ *            "email"= "fabricio@fabricio.com",
+ *            "enabled"= false,
+ *            "token"= "e11e396c511549a5e3c3d90d7d2131e00288c680"
+ *        },
+ *        "time"= {
+ *           "date"= "2011-01-01 15:03:01.000000",
+ *           "timezone_type"= 3,
+ *           "timezone"= "Europe/Berlin"
+ *        }
+ *      }
+ * )
+ */
+
+/**
+ * Result array definition
+ *
+ * @SWG\Definition(
+ *     definition = "ResultsArray",
+ *      @SWG\Property(
+ *          property    = "results",
+ *          description = "Results array",
+ *          type        = "array",
+ *          items       = {
+ *              "$ref": "#/definitions/Result"
+ *          }
+ *      )
+ * )
+ */

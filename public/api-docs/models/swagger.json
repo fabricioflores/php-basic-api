@@ -218,6 +218,84 @@
         }
     },
     "definitions": {
+        "Result": {
+            "required": [
+                "id",
+                "result",
+                "time"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Result Id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "result": {
+                    "description": "Result value",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "time": {
+                    "description": "Timestamp of creation",
+                    "type": "string",
+                    "format": "date"
+                },
+                "user_id": {
+                    "description": "User Id FK",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "example": {
+                "id": 1508,
+                "result": 10,
+                "time": "2016-12-11 00:00:00",
+                "user_id": 1
+            }
+        },
+        "ResultData": {
+            "properties": {
+                "result": {
+                    "description": "Result value",
+                    "type": "string"
+                },
+                "date": {
+                    "description": "Timestamp of creation",
+                    "type": "string"
+                },
+                "user_id": {
+                    "description": "user id",
+                    "type": "string"
+                }
+            },
+            "example": {
+                "id": 7,
+                "result": 0,
+                "user": {
+                    "id": 5,
+                    "username": "fabriciofloresgallardo",
+                    "email": "fabricio@fabricio.com",
+                    "enabled": false,
+                    "token": "e11e396c511549a5e3c3d90d7d2131e00288c680"
+                },
+                "time": {
+                    "date": "2011-01-01 15:03:01.000000",
+                    "timezone_type": 3,
+                    "timezone": "Europe/Berlin"
+                }
+            }
+        },
+        "ResultsArray": {
+            "properties": {
+                "results": {
+                    "description": "Results array",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Result"
+                    }
+                }
+            }
+        },
         "User": {
             "required": [
                 "id",
@@ -321,6 +399,14 @@
         }
     },
     "parameters": {
+        "resultId": {
+            "name": "resultId",
+            "in": "path",
+            "description": "ID of result to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+        },
         "userId": {
             "name": "userId",
             "in": "path",

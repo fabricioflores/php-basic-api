@@ -81,7 +81,7 @@ class User implements \JsonSerializable
         $this->username = $username;
         $this->email = $email;
         $this->enabled = $enabled;
-        $this->token = sha1(uniqid($token, true));
+        $this->setToken($token);
         $this->setPassword($password);
     }
 
@@ -208,7 +208,7 @@ class User implements \JsonSerializable
      */
     public function setToken(string $token): User
     {
-        $this->token = $token;
+        $this->token = sha1(uniqid($token, true));
         return $this;
     }
 

@@ -290,11 +290,44 @@ $app->put(
     '/users/{id:[0-9]+}',
     function ($request, $response, $args) {
         $this->logger->info('PUT \'/users\'');
+        $em = getEntityManager();
         $data = json_decode($request->getBody(), true); // parse the JSON into an assoc. array
-        // process $data...
-
-        // TODO
-        $newResponse = $response->withStatus(501);
-        return $newResponse;
+        $user = $em->getRepository('MiW16\Results\Entity\User')->find($args['id']);
+        if ($user) {
+          if (empty($data['username']) || empty($data['email']) || empty($data['password'])) {
+            $newResponse = $response->withStatus(422);
+            $datos = array(
+                'code' => 422,
+                'message' => 'Username, e-mail or password is left out'
+            );
+            return $this->renderer->render($newResponse, 'message.phtml', $datos);
+          }else{
+            $existingUser = $em->getRepository('MiW16\Results\Entity\User')
+                       ->findOneBy(array('username' => $data['username'], 'email' => $data['email']));
+            if ($existingUser && $existingUser!= $user) {
+              $newResponse = $response->withStatus(400);
+              $datos = array(
+                  'code' => 400,
+                  'message' => 'Username or email already exists.'
+              );
+              return $this->renderer->render($newResponse, 'message.phtml', $datos);
+            }else{
+              $user->setUsername($data['username']);
+              $user->setEmail($data['email']);
+              $user->setPassword($data['password']);
+              $user->setEnabled($data['enabled']);
+              $user->setToken($data['token']);
+              $em->flush();
+            }
+          }
+        }else{
+          $newResponse = $response->withStatus(404);
+          $datos = array(
+              'code' => 404,
+              'message' => 'User not found'
+          );
+          return $this->renderer->render($newResponse, 'message.phtml', $datos);
+        }
+        return $response->withJson($user);
     }
 )->setName('miw_post_users');

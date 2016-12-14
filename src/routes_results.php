@@ -228,9 +228,83 @@ $app->post(
           $result = new Result($data['result'],
                                $user,
                                $time);
-            $em->persist($result);
-            $em->flush();
+          $em->persist($result);
+          $em->flush();
         }
         return $response->withJson($result, 201);
     }
 )->setName('miw_post_results');
+
+/**
+ * Summary: Updates a result
+ * Notes: Updates the result identified by &#x60;resultId&#x60;.
+ *
+ * @SWG\Put(
+ *     method      = "PUT",
+ *     path        = "/results/{resultId}",
+ *     tags        = { "Results" },
+ *     summary     = "Updates a result",
+ *     description = "Updates the result identified by `resultId`.",
+ *     operationId = "miw_put_results",
+ *     parameters={
+ *          { "$ref" = "#/parameters/resultId" },
+ *          {
+ *          "name":        "data",
+ *          "in":          "body",
+ *          "description": "`Result` data to update",
+ *          "required":    true,
+ *          "schema":      { "$ref": "#/definitions/ResultData" }
+ *          }
+ *     },
+ *     @SWG\Response(
+ *          response    = 200,
+ *          description = "`Ok` Result previously existed and is now updated",
+ *          schema      = { "$ref": "#/definitions/Result" }
+ *     ),
+ *     @SWG\Response(
+ *          response    = 404,
+ *          description = "`Not Found` The result could not be found",
+ *          schema      = { "$ref": "#/definitions/Message" }
+ *     ),
+ *     @SWG\Response(
+ *          response    = 422,
+ *          description = "`Unprocessable entity` Result or time is left out",
+ *          schema      = { "$ref": "#/definitions/Message" }
+ *     )
+ * )
+ */
+$app->put(
+    '/results/{id:[0-9]+}',
+    function ($request, $response, $args) {
+        $this->logger->info('PUT \'/results\'');
+        $em = getEntityManager();
+        $data = json_decode($request->getBody(), true); // parse the JSON into an assoc. array
+        $result = $em->getRepository('MiW16\Results\Entity\Result')->find($args['id']);
+        if ($result) {
+          if (empty($data['result']) || empty($data['time'])) {
+            $newResponse = $response->withStatus(422);
+            $datos = array(
+                'code' => 422,
+                'message' => 'Result or time is left out'
+            );
+            return $this->renderer->render($newResponse, 'message.phtml', $datos);
+          }else{
+            $user = $em->getRepository('MiW16\Results\Entity\User')
+                       ->findOneById($data['user_id']);
+            $time = new \DateTime($data['time']);
+            $result->setResult($data['result']);
+            $result->setUser($user);
+            $result->setTime($time);
+            $em->flush();
+          }
+        }else{
+          $newResponse = $response->withStatus(404);
+          $datos = array(
+              'code' => 404,
+              'message' => 'User not found'
+          );
+          return $this->renderer->render($newResponse, 'message.phtml', $datos);
+        }
+        return $response->withJson($result);
+    }
+)->setName('miw_post_users');

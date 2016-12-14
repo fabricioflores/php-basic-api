@@ -88,7 +88,7 @@ class Result implements \JsonSerializable
      * @param int $result
      * @return Result
      */
-    public function setResult(int $result): Result
+    public function setResult($result): Result
     {
         $this->result = $result;
         return $this;
@@ -106,7 +106,7 @@ class Result implements \JsonSerializable
      * @param User $user
      * @return Result
      */
-    public function setUser(User $user): Result
+    public function setUser($user): Result
     {
         $this->user = $user;
         return $this;

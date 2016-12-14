@@ -119,6 +119,48 @@
                     }
                 }
             },
+            "put": {
+                "tags": [
+                    "Results"
+                ],
+                "summary": "Updates a result",
+                "description": "Updates the result identified by `resultId`.",
+                "operationId": "miw_put_results",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resultId"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "`Result` data to update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ResultData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "`Ok` Result previously existed and is now updated",
+                        "schema": {
+                            "$ref": "#/definitions/Result"
+                        }
+                    },
+                    "404": {
+                        "description": "`Not Found` The result could not be found",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    },
+                    "422": {
+                        "description": "`Unprocessable entity` Result or time is left out",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "Results"

@@ -1,0 +1,929 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MiW16 Results REST api</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>MiW16 Results REST api</h1>
+    <div class="app-desc">[UPM] MiW16 Results REST api operations</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 0.1.0</div>
+    <div class="app-desc">BasePath:/</div>
+    <div class="license-info">MIT</div>
+    <div class="license-url">./LICENSE.txt</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Results">Results</a></h4>
+  <ul>
+  <li><a href="#miwCgetResults"><code><span class="http-method">get</span> /results</code></a></li>
+  <li><a href="#miwDeleteResults"><code><span class="http-method">delete</span> /results/{resultId}</code></a></li>
+  <li><a href="#miwGetResults"><code><span class="http-method">get</span> /results/{resultId}</code></a></li>
+  <li><a href="#miwOptionsResults"><code><span class="http-method">options</span> /results</code></a></li>
+  <li><a href="#miwPostResult"><code><span class="http-method">post</span> /results</code></a></li>
+  <li><a href="#miwPutResults"><code><span class="http-method">put</span> /results/{resultId}</code></a></li>
+  </ul>
+  <h4><a href="#Users">Users</a></h4>
+  <ul>
+  <li><a href="#miwCgetUsers"><code><span class="http-method">get</span> /users</code></a></li>
+  <li><a href="#miwDeleteUsers"><code><span class="http-method">delete</span> /users/{userId}</code></a></li>
+  <li><a href="#miwGetUsers"><code><span class="http-method">get</span> /users/{userId}</code></a></li>
+  <li><a href="#miwOptionsUsers"><code><span class="http-method">options</span> /users</code></a></li>
+  <li><a href="#miwPostUsers"><code><span class="http-method">post</span> /users</code></a></li>
+  <li><a href="#miwPutUsers"><code><span class="http-method">put</span> /users/{userId}</code></a></li>
+  </ul>
+
+  <h1><a name="Results">Results</a></h1>
+  <div class="method"><a name="miwCgetResults"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /results</code></pre></div>
+    <div class="method-summary">Returns all results (<span class="nickname">miwCgetResults</span>)</div>
+    <div class="method-notes">Returns all results from the system that the result has access to.</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ResultsArray">ResultsArray</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "results" : [ {
+    "result" : 123,
+    "user_id" : 123,
+    "id" : 123,
+    "time" : "2000-01-23T04:56:07.000+00:00"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Result array response
+        <a href="#ResultsArray">ResultsArray</a>
+    <h4 class="field-label">404</h4>
+    Result object not found
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwDeleteResults"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /results/{resultId}</code></pre></div>
+    <div class="method-summary">Deletes a result (<span class="nickname">miwDeleteResults</span>)</div>
+    <div class="method-notes">Deletes the result identified by &#x60;resultId&#x60;.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">resultId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of result to fetch format: int32</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Result deleted &amp;lt;Response body is empty&amp;gt;
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Result not found
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwGetResults"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /results/{resultId}</code></pre></div>
+    <div class="method-summary">Returns a result based on a single ID (<span class="nickname">miwGetResults</span>)</div>
+    <div class="method-notes">Returns the result identified by &#x60;resultId&#x60;.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">resultId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of result to fetch format: int32</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Result">Result</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : 123,
+  "user_id" : 123,
+  "id" : 123,
+  "time" : "2000-01-23T04:56:07.000+00:00"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Result
+        <a href="#Result">Result</a>
+    <h4 class="field-label">404</h4>
+    Result id. not found
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwOptionsResults"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="options"><code class="huge"><span class="http-method">options</span> /results</code></pre></div>
+    <div class="method-summary">Provides the list of HTTP supported methods (<span class="nickname">miwOptionsResults</span>)</div>
+    <div class="method-notes">Return a &#x60;Allow&#x60; header with a list of HTTP supported methods.</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    &#x60;Allow&#x60; header &amp;lt;Response body is empty&amp;gt;
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwPostResult"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /results</code></pre></div>
+    <div class="method-summary">Creates a new result (<span class="nickname">miwPostResult</span>)</div>
+    <div class="method-notes">Creates a new result</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">data (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; &#x60;Result&#x60; properties to add to the system </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Result">Result</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : 123,
+  "user_id" : 123,
+  "id" : 123,
+  "time" : "2000-01-23T04:56:07.000+00:00"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    &#x60;Created&#x60; Result created
+        <a href="#Result">Result</a>
+    <h4 class="field-label">422</h4>
+    &#x60;Unprocessable entity&#x60; Result or time is left out
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwPutResults"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /results/{resultId}</code></pre></div>
+    <div class="method-summary">Updates a result (<span class="nickname">miwPutResults</span>)</div>
+    <div class="method-notes">Updates the result identified by &#x60;resultId&#x60;.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">resultId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of result to fetch format: int32</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">data (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; &#x60;Result&#x60; data to update </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Result">Result</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : 123,
+  "user_id" : 123,
+  "id" : 123,
+  "time" : "2000-01-23T04:56:07.000+00:00"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    &#x60;Ok&#x60; Result previously existed and is now updated
+        <a href="#Result">Result</a>
+    <h4 class="field-label">404</h4>
+    &#x60;Not Found&#x60; The result could not be found
+        <a href="#Message">Message</a>
+    <h4 class="field-label">422</h4>
+    &#x60;Unprocessable entity&#x60; Result or time is left out
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Users">Users</a></h1>
+  <div class="method"><a name="miwCgetUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /users</code></pre></div>
+    <div class="method-summary">Returns all users (<span class="nickname">miwCgetUsers</span>)</div>
+    <div class="method-notes">Returns all users from the system that the user has access to.</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#UsersArray">UsersArray</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "users" : [ {
+    "id" : 123,
+    "email" : "aeiou",
+    "enabled" : true,
+    "username" : "aeiou",
+    "token" : "aeiou"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    User array response
+        <a href="#UsersArray">UsersArray</a>
+    <h4 class="field-label">404</h4>
+    User object not found
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwDeleteUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /users/{userId}</code></pre></div>
+    <div class="method-summary">Deletes a user (<span class="nickname">miwDeleteUsers</span>)</div>
+    <div class="method-notes">Deletes the user identified by &#x60;userId&#x60;.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int32</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    User deleted &amp;lt;Response body is empty&amp;gt;
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    User not found
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwGetUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /users/{userId}</code></pre></div>
+    <div class="method-summary">Returns a user based on a single ID (<span class="nickname">miwGetUsers</span>)</div>
+    <div class="method-notes">Returns the user identified by &#x60;userId&#x60;.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int32</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#User">User</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "id" : 123,
+  "email" : "aeiou",
+  "enabled" : true,
+  "username" : "aeiou",
+  "token" : "aeiou"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    User
+        <a href="#User">User</a>
+    <h4 class="field-label">404</h4>
+    User id. not found
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwOptionsUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="options"><code class="huge"><span class="http-method">options</span> /users</code></pre></div>
+    <div class="method-summary">Provides the list of HTTP supported methods (<span class="nickname">miwOptionsUsers</span>)</div>
+    <div class="method-notes">Return a &#x60;Allow&#x60; header with a list of HTTP supported methods.</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    &#x60;Allow&#x60; header &amp;lt;Response body is empty&amp;gt;
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwPostUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /users</code></pre></div>
+    <div class="method-summary">Creates a new user (<span class="nickname">miwPostUsers</span>)</div>
+    <div class="method-notes">Creates a new user</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">data (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; &#x60;User&#x60; properties to add to the system </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#User">User</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "id" : 123,
+  "email" : "aeiou",
+  "enabled" : true,
+  "username" : "aeiou",
+  "token" : "aeiou"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    &#x60;Created&#x60; User created
+        <a href="#User">User</a>
+    <h4 class="field-label">400</h4>
+    &#x60;Bad Request&#x60; Username or email already exists.
+        <a href="#Message">Message</a>
+    <h4 class="field-label">422</h4>
+    &#x60;Unprocessable entity&#x60; Username, e-mail or password is left out
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="miwPutUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /users/{userId}</code></pre></div>
+    <div class="method-summary">Updates a user (<span class="nickname">miwPutUsers</span>)</div>
+    <div class="method-notes">Updates the user identified by &#x60;userId&#x60;.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int32</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">data (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; &#x60;User&#x60; data to update </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#User">User</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "id" : 123,
+  "email" : "aeiou",
+  "enabled" : true,
+  "username" : "aeiou",
+  "token" : "aeiou"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    &#x60;Ok&#x60; User previously existed and is now updated
+        <a href="#User">User</a>
+    <h4 class="field-label">400</h4>
+    &#x60;Bad Request&#x60; User name or e-mail already exists
+        <a href="#Message">Message</a>
+    <h4 class="field-label">404</h4>
+    &#x60;Not Found&#x60; The user could not be found
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <div class="up"><a href="#__Models">Up</a></div>
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Message"><code>Message</code></a></li>
+    <li><a href="#Result"><code>Result</code></a></li>
+    <li><a href="#ResultData"><code>ResultData</code></a></li>
+    <li><a href="#ResultsArray"><code>ResultsArray</code></a></li>
+    <li><a href="#User"><code>User</code></a></li>
+    <li><a href="#UserData"><code>UserData</code></a></li>
+    <li><a href="#UsersArray"><code>UsersArray</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3 class="field-label"><a name="Message">Message - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Response code format: int32</div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Response message </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="Result">Result - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Result Id format: int32</div>
+<div class="param">result </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Result value format: int32</div>
+<div class="param">time </div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> Timestamp of creation format: date</div>
+<div class="param">user_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> User Id FK format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="ResultData">ResultData - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">result (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Result value </div>
+<div class="param">time (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Timestamp of creation </div>
+<div class="param">user_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> user id </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="ResultsArray">ResultsArray - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">results (optional)</div><div class="param-desc"><span class="param-type"><a href="#Result">array[Result]</a></span> Results array </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="User">User - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> User Id format: int32</div>
+<div class="param">username </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User name </div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User email </div>
+<div class="param">token (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> API access token </div>
+<div class="param">enabled (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Denotes if user is enabled </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="UserData">UserData - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User name </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User email </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User password format: password</div>
+<div class="param">enabled (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Denotes if user is enabled </div>
+<div class="param">token (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User token </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="UsersArray">UsersArray - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">users (optional)</div><div class="param-desc"><span class="param-type"><a href="#User">array[User]</a></span> Users array </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

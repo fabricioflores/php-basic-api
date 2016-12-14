@@ -45,6 +45,35 @@
                 }
             }
         },
+        "/results/{resultId}": {
+            "get": {
+                "tags": [
+                    "Results"
+                ],
+                "summary": "Returns a result based on a single ID",
+                "description": "Returns the result identified by `resultId`.",
+                "operationId": "miw_get_results",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resultId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result",
+                        "schema": {
+                            "$ref": "#/definitions/Result"
+                        }
+                    },
+                    "404": {
+                        "description": "Result id. not found",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                }
+            }
+        },
         "/users": {
             "get": {
                 "tags": [

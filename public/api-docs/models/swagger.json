@@ -44,6 +44,39 @@
                     }
                 }
             },
+            "post": {
+                "tags": [
+                    "Results"
+                ],
+                "summary": "Creates a new result",
+                "description": "Creates a new result",
+                "operationId": "miw_post_result",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "`Result` properties to add to the system",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ResultData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "`Created` Result created",
+                        "schema": {
+                            "$ref": "#/definitions/Result"
+                        }
+                    },
+                    "422": {
+                        "description": "`Unprocessable entity` Result or time is left out",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                }
+            },
             "options": {
                 "tags": [
                     "Results"
@@ -325,7 +358,7 @@
                     "description": "Result value",
                     "type": "string"
                 },
-                "date": {
+                "time": {
                     "description": "Timestamp of creation",
                     "type": "string"
                 },

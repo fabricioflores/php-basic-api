@@ -60,7 +60,7 @@ class Result implements \JsonSerializable
      * @param User      $user   user
      * @param \DateTime $time   time
      */
-    public function __construct(int $result, User $user, \DateTime $time)
+    public function __construct($result, $user, $time)
     {
         $this->id     = 0;
         $this->result = $result;
@@ -215,7 +215,7 @@ class Result implements \JsonSerializable
  *          type        = "string"
  *      ),
  *      @SWG\Property(
- *          property    = "date",
+ *          property    = "time",
  *          description = "Timestamp of creation",
  *          type        = "string"
  *      ),

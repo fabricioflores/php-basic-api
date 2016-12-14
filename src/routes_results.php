@@ -175,3 +175,62 @@ $app->options(
             );
     }
 )->setName('miw_options_results');
+
+/**
+ * Summary: Creates a new result
+ * Notes: Creates a new result
+ *
+ * @SWG\Post(
+ *     method      = "POST",
+ *     path        = "/results",
+ *     tags        = { "Results" },
+ *     summary     = "Creates a new result",
+ *     description = "Creates a new result",
+ *     operationId = "miw_post_result",
+ *     parameters  = {
+ *          {
+ *          "name":        "data",
+ *          "in":          "body",
+ *          "description": "`Result` properties to add to the system",
+ *          "required":    true,
+ *          "schema":      { "$ref": "#/definitions/ResultData" }
+ *          }
+ *     },
+ *     @SWG\Response(
+ *          response    = 201,
+ *          description = "`Created` Result created",
+ *          schema      = { "$ref": "#/definitions/Result" }
+ *     ),
+ *     @SWG\Response(
+ *          response    = 422,
+ *          description = "`Unprocessable entity` Result or time is left out",
+ *          schema      = { "$ref": "#/definitions/Message" }
+ *     )
+ * )
+ */
+$app->post(
+    '/results',
+    function ($request, $response, $args) {
+        $this->logger->info('POST \'/results\'');
+        $em = getEntityManager();
+        $data = json_decode($request->getBody(), true); // parse the JSON into an assoc. array
+        if (empty($data['result']) || empty($data['time'])) {
+          $newResponse = $response->withStatus(422);
+          $data = array(
+              'code' => 422,
+              'message' => 'Result or time is left out'
+          );
+          return $this->renderer->render($newResponse, 'message.phtml', $data);
+        }else{
+          $user = $em->getRepository('MiW16\Results\Entity\User')
+                     ->findOneById($data['user_id']);
+          $time = new \DateTime($data['time']);
+          $result = new Result($data['result'],
+                               $user,
+                               $time);
+            $em->persist($result);
+            $em->flush();
+        }
+        return $response->withJson($result, 201);
+    }
+)->setName('miw_post_results');

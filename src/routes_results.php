@@ -145,3 +145,33 @@ $app->delete(
         return $response->withStatus(204);
     }
 )->setName('miw_delete_users');
+
+/**
+ * Summary: Provides the list of HTTP supported methods
+ * Notes: Return a &#x60;Allow&#x60; header with a list of HTTP supported methods.
+ *
+ * @SWG\Options(
+ *     method      = "OPTIONS",
+ *     path        = "/results",
+ *     tags        = { "Results" },
+ *     summary     = "Provides the list of HTTP supported methods",
+ *     description = "Return a `Allow` header with a list of HTTP supported methods.",
+ *     operationId = "miw_options_results",
+ *     @SWG\Response(
+ *          response    = 200,
+ *          description = "`Allow` header &lt;Response body is empty&gt;",
+ *     )
+ * )
+ */
+$app->options(
+    '/results',
+    function ($request, $response, $args) {
+        $this->logger->info('OPTIONS \'/results\'');
+
+        return $response
+            ->withHeader(
+                'Allow',
+                'OPTIONS, GET, POST, PUT, DELETE'
+            );
+    }
+)->setName('miw_options_results');

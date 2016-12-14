@@ -43,6 +43,19 @@
                         }
                     }
                 }
+            },
+            "options": {
+                "tags": [
+                    "Results"
+                ],
+                "summary": "Provides the list of HTTP supported methods",
+                "description": "Return a `Allow` header with a list of HTTP supported methods.",
+                "operationId": "miw_options_results",
+                "responses": {
+                    "200": {
+                        "description": "`Allow` header &lt;Response body is empty&gt;"
+                    }
+                }
             }
         },
         "/results/{resultId}": {

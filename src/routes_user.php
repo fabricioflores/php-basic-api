@@ -225,9 +225,11 @@ $app->post(
           );
           return $this->renderer->render($newResponse, 'message.phtml', $datos);
         }else{
-          $user = $em->getRepository('MiW16\Results\Entity\User')
-                     ->findOneBy(array('username' => $data['username'], 'email' => $data['email']));
-          if ($user) {
+          $queryBuilder = $em->createQuery('SELECT f FROM MiW16\Results\Entity\User f WHERE f.username = :username OR f.email = :email')
+                              ->setParameter('username', $data['username'])
+                              ->setParameter('email', $data['email'])
+                              ->getOneOrNullResult();
+          if ($queryBuilder) {
             $newResponse = $response->withStatus(400);
             $datos = array(
                 'code' => 400,
